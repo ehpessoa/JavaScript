@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>WebcamJS Test Page</title>
+	<title>WebcamJS Constraints Test Page</title>
 	<style type="text/css">
 		body { font-family: Helvetica, sans-serif; }
 		h2, h3 { margin-top:0; }
@@ -15,25 +15,33 @@
 <body>
 	<div id="results">Your captured image will appear here...</div>
 	
-	<h1>WebcamJS Test Page</h1>
-	<h3>Demonstrates simple 320x240 capture &amp; display</h3>
+	<h1>WebcamJS Constraints Test Page</h1>
+	<h3>Demonstrates using the HTML5 user media constraints object</h3>
 	
 	<div id="my_camera"></div>
 	
 	<!-- First, include the Webcam.js JavaScript Library -->
-	<script type="text/javascript" src="webcam.js"></script>
+	<script type="text/javascript" src="../webcam.js"></script>
 	
 	<!-- Configure a few settings and attach camera -->
-	<script language="JavaScript">	
-	
+	<script language="JavaScript">
 		Webcam.set({
 			width: 320,
 			height: 240,
 			image_format: 'jpeg',
-			jpeg_quality: 90
+			jpeg_quality: 90,
+			constraints: {
+				mandatory: {
+					minWidth: 320,
+					minHeight: 240
+					// minFrameRate: 30
+				},
+				optional: [
+					{ minFrameRate: 60 }
+				]
+			}
 		});
 		Webcam.attach( '#my_camera' );
-				
 	</script>
 	
 	<!-- A button for taking snaps -->
@@ -52,13 +60,7 @@
 					'<img src="'+data_uri+'"/>';
 			} );
 		}
-
-			
 	</script>
 	
-
 </body>
-
-
-
 </html>
